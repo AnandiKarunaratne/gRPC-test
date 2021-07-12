@@ -1,0 +1,30 @@
+// define a service in a .proto file
+// specifying methods that can be called remotely
+// along with their parameters and return types
+
+// configuration details
+syntax = "proto3"; // syntax used in this file
+option java_multiple_files = true; // overrides default setting of compiler generating all java code in a single file
+package org.anda.grpc; // package we want to use for our generated java classes
+
+// defines the request payload
+// each attribute that goes into the message is defined with type
+// unique number is assigned to each attribute - "TAG"
+// tag = used by the protocol buffer to represent the attribute instead of name
+message HelloRequest {
+    string firstName = 1;
+    string lastName = 2;
+}
+
+// we can use same tag across multiple message types
+message HelloResponse {
+    string greeting = 1;
+}
+
+// defining service contract
+// Hello() operation accepts a unary request, and returns a unary response
+service HelloService {
+    rpc hello(HelloRequest) returns (HelloResponse);
+}
+
+
